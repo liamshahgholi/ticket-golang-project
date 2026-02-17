@@ -9,13 +9,13 @@ import (
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/log"
-
+	_ "github.com/lib/pq"
 	"github.com/liamshahgholi/ticket-golang-project/internal/api"
 	db "github.com/liamshahgholi/ticket-golang-project/internal/db/sqlc"
 	"github.com/liamshahgholi/ticket-golang-project/internal/routes"
 	"github.com/liamshahgholi/ticket-golang-project/internal/util"
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 )
 
 func main() {
@@ -49,16 +49,17 @@ func main() {
 
 	server, err := api.NewServer(config, store)
 	if err != nil {
-		log.Fatal().Err(err).Msg("cannot create server")
+		log.Fatal().Err(err).Msg("cannot create serve")
 	}
 
 	// Register the routes
 	if err := routes.SetupRoutes(server); err != nil {
-		log.Fatal().Err(err).Msg("failed to set up routes")
+		log.Fatal().Err(err).Msg("ailed to set up routes")
 	}
 
-	if err := server.Start(config.APPPORT); err != nil {
-		log.Fatal().Err(err).Msg("cannot start server")
+	err = server.Start(config.APPPORT)
+	if err != nil {
+		log.Fatal().Err(err).Msg("cannot start serve")
 	}
 }
 

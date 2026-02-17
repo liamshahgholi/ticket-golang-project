@@ -1,21 +1,3 @@
-# Binaries
-*.exe
-*.dll
-*.so
-*.dylib
-*.test
-*.out
-
-# Go workspace (اگر بعداً استفاده کردی)
-go.work
-go.work.sum
-
-# VS Code
-.vscode/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
+Makefile
+.idea
+tmp
